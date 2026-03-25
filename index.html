@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Banquinho do SID</title>
+        <link href="style.css" rel="stylesheet"></link>
+        <script src="app.js"></script>
+    </head>
+    <body>
+        <div class="fundo-principal">
+            <h1 class="titulo">Banquinho do SID</h1>
+            <div class="overlay" id="overlay">
+                <div class="modal">
+                    <div class="modal-header">
+                        <h1>Bem-vindo ao Banquinho do SID!</h1>
+                        <input type="text" id="nomeJogador" placeholder="Nome do Jogador">
+                        <button onclick="adicionarJogador()">Adicionar</button>
+                        <button onclick="iniciarJogo()">Iniciar Jogo</button>
+                    </div>
+                    <div class="listaJogadores" id="listaJogadores">
+                                                                   
+                    </div>
+                </div>
+            </div>
+
+            <div class="jogadores" id="jogadoresAtivos"> 
+            </div>
+
+            <navbar class="navbar">
+                <button class="Tranferir" id="Tranferir" onclick="fazerPix()">Pix</button>
+                <button class="adcionar" id="adcionar" onclick="adcionar()">Add</button>
+                <button class="remover" id="remover" onclick="remover()">Remover</button>
+            </navbar>
+        </div>
+    </body>
+</html>

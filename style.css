@@ -1,0 +1,137 @@
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-image: 
+        url("sid.png"),
+        radial-gradient(circle, #f1fdc4, #aee0e0);
+    background-repeat: repeat, no-repeat;
+    background-size: 200px, cover;
+}
+
+.titulo{
+    font-family: 'arial';
+    text-align: center;
+    color: rgb(0, 0, 0);
+    border: 3px solid black;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.fundo-principal{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 2%;
+    width: 95%;
+    height: 95vh;
+}
+
+.jogadores{
+    background-color: rgba(99, 98, 97, 0.2) ;
+    display: flex;
+    flex-wrap: wrap;
+    GAP: 15px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 80%;
+    height: 80vh;
+}
+
+.jogador{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    width: 150px;
+    height: 150px;
+    font-size: 30px;
+}
+
+.navbar{
+    margin: 10px;
+}
+
+button{
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #f1fdc4;
+}
+
+.overlay{
+    position: fixed;
+    inset: 0;
+    
+    background: rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 85%;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-header {
+    width: 30%;
+    flex: 1;
+    display: grid;
+    justify-content: center;
+
+    gap: 5px;
+    height: 70%;
+}
+
+.listaJogadores{
+    flex: 2;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    gap: 5px;
+    font-size: 20px;
+    border-radius: 10px;
+    
+}
+
+.jogadorAdd{
+    display: grid;
+    width: 750px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(240, 115, 12, 0.2);
+    margin: 1px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-size: 50px;
+}
