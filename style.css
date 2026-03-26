@@ -85,6 +85,11 @@ button:hover {
     z-index: 1000;
 }
 
+.imagem-sid{
+    display: flex;
+    width: 500px;
+}
+
 .hidden {
     display: none;
 }
@@ -102,11 +107,11 @@ button:hover {
 }
 
 .modal-header {
-    width: 30%;
+    width: 40%;
     flex: 1;
     display: grid;
     justify-content: center;
-
+    padding: 5px;
     gap: 5px;
     height: 70%;
 }
@@ -116,7 +121,7 @@ button:hover {
     display: grid;
     align-items: center;
     justify-content: center;
-    width: 70%;
+    width: 64%;
     gap: 5px;
     font-size: 20px;
     border-radius: 10px;
@@ -134,4 +139,15 @@ button:hover {
     border-radius: 10px;
     border: 2px solid black;
     font-size: 50px;
+}
+
+.banner-oculto {
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.banner-visivel {
+    display: block; 
+        
 }

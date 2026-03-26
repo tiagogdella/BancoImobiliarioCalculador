@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Banquinho do SID</title>
         <link href="style.css" rel="stylesheet"></link>
-        <script src="app.js"></script>
     </head>
     <body>
         <div class="fundo-principal">
@@ -13,13 +12,13 @@
             <div class="overlay" id="overlay">
                 <div class="modal">
                     <div class="modal-header">
-                        <h1>Bem-vindo ao Banquinho do SID!</h1>
+                        <h1>--- Bora banquinho! :) ---</h1>
                         <input type="text" id="nomeJogador" placeholder="Nome do Jogador">
                         <button onclick="adicionarJogador()">Adicionar</button>
                         <button onclick="iniciarJogo()">Iniciar Jogo</button>
                     </div>
                     <div class="listaJogadores" id="listaJogadores">
-                                                                   
+                        <img src="sid.png" alt="Imagem do SID" id="imagem-sid" class="imagem-sid">                                              
                     </div>
                 </div>
             </div>
@@ -27,11 +26,30 @@
             <div class="jogadores" id="jogadoresAtivos"> 
             </div>
 
+            <div id="bannerPix" class="banner-oculto">
+                <p>PIX</p>
+                <form>
+                    <select id="nome1" placeholder="De">
+                    <select id="nome2" placeholder="Para">
+                    <input type="number" id="valor" placeholder="Valor">
+                </form>
+                <button onclick="fazerPix()">Fazer Pix </button>
+                <button onclick="fecharBannerPix()">Fechar</button>
+            </div>
+
+            <div id="meuBanner" class="banner-oculto">
+                <p>Sem saldo suficiente!</p>
+                <button onclick="negociar()">Negociar</button>
+                <button onclick="Falir()">Faliu kkk</button>
+                <button onclick="fecharModalSemSaldo()">Fechar</button>
+            </div>
+
             <navbar class="navbar">
-                <button class="Tranferir" id="Tranferir" onclick="fazerPix()">Pix</button>
+                <button class="Tranferir" id="tranferir" onclick="abrirBannerPix()">Pix</button>
                 <button class="adcionar" id="adcionar" onclick="adcionar()">Add</button>
                 <button class="remover" id="remover" onclick="remover()">Remover</button>
             </navbar>
         </div>
+        <script src="app.js"></script>
     </body>
 </html>
