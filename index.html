@@ -5,71 +5,74 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Banquinho do SID</title>
         <link href="style.css" rel="stylesheet"></link>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     </head>
     <body>
-        <div class="fundo-principal">
-            <h1 class="titulo">Banquinho do SID</h1>
-            <div class="overlay" id="overlay">
-                <div class="modal">
-                    <div class="modal-header">
-                        <h1>--- Bora banquinho! :) ---</h1>
-                        <input type="text" id="nomeJogador" placeholder="Nome do Jogador">
-                        <button onclick="adicionarJogador()">Adicionar</button>
-                        <button onclick="iniciarJogo()">Iniciar Jogo</button>
-                    </div>
-                    <div class="listaJogadores" id="listaJogadores">
-                        <img src="sid.png" alt="Imagem do SID" id="imagem-sid" class="imagem-sid">                                              
+        <div id="app">
+            <div class="fundo-principal">
+                <h1 class="titulo">Banquinho do SID</h1>
+
+                <div class="overlay" id="overlay">
+                    <div class="modal">
+                        <div class="modal-header">
+                            <h1>--- Bora banquinho! :) ---</h1>
+                            <input type="text" id="nomeJogador" placeholder="Nome do Jogador">
+                            <button onclick="adicionarJogador()">Adicionar</button>
+                            <button onclick="iniciarJogo()">Iniciar Jogo</button>
+                        </div>
+                        <div class="listaJogadores" id="listaJogadores">
+                            <img src="sid.png" alt="Imagem do SID" id="imagem-sid" class="imagem-sid">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="jogadores" id="jogadoresAtivos"> 
-            </div>
+                <div class="jogadores" id="jogadoresAtivos"></div>
 
-            <div id="bannerPix" class="banner-oculto">
-                <p>PIX</p>
-                <form>
-                    <select id="nomeDe" placeholder="De"></select>
-                    <select id="nomePara" placeholder="Para"></select>
-                    <input type="number" id="valorPix" placeholder="Valor">
-                </form>
-                <button onclick="fazerPix()">Fazer Pix </button>
-                <button onclick="fecharBannerPix()">Fechar</button>
-            </div>
+                <div id="bannerPix" class="banner-oculto">
+                    <p>PIX</p>
+                    <form>
+                        <select id="nomeDe" placeholder="De"></select>
+                        <select id="nomePara" placeholder="Para"></select>
+                        <input type="number" id="valorPix" placeholder="Valor">
+                    </form>
+                    <button onclick="fazerPix()">Fazer Pix</button>
+                    <button onclick="fecharBannerPix()">Fechar</button>
+                </div>
 
-            <div id="bannerAdd" class="banner-oculto">
-                <p>farma: :)</p>
-                <form>
-                    <select id="nomeAdd" placeholder="Jogador"></select>
-                    <input type="number" id="valorAdd" placeholder="Valor">
-                </form>
-                <button onclick="adcionar()">Add</button>
-                <button onclick="fecharBannerAdd()">Fechar</button>
-            </div>
+                <div id="bannerAdd" class="banner-oculto">
+                    <p>farma: :)</p>
+                    <form>
+                        <select id="nomeAdd" placeholder="Jogador"></select>
+                        <input type="number" id="valorAdd" placeholder="Valor">
+                    </form>
+                    <button onclick="adcionar()">Add</button>
+                    <button onclick="fecharBannerAdd()">Fechar</button>
+                </div>
 
-            <div id="bannerRem" class="banner-oculto">
-                <p>poxa :(</p>
-                <form>
-                    <select id="nomeRem" placeholder="Jogador"></select>
-                    <input type="number" id="valorRem" placeholder="Valor">
-                </form>
-                <button onclick="remover()">Remover</button>
-                <button onclick="fecharBannerRem()">Fechar</button>
-            </div>
+                <div id="bannerRem" class="banner-oculto">
+                    <p>poxa :(</p>
+                    <form>
+                        <select id="nomeRem" placeholder="Jogador"></select>
+                        <input type="number" id="valorRem" placeholder="Valor">
+                    </form>
+                    <button onclick="remover()">Remover</button>
+                    <button onclick="fecharBannerRem()">Fechar</button>
+                </div>
 
-            <div id="bannerFal" class="banner-oculto">
-                <p>Tempos melhores virão :(</p>
-                <select id="nomeFal" placeholder="Jogador"></select>
-                <button onclick="falir()">Falir</button>
-                <button onclick="fecharBannerFal()">Fechar</button>
-            </div>
+                <div id="bannerFal" class="banner-oculto">
+                    <p>Tempos melhores virão :(</p>
+                    <select id="nomeFal" placeholder="Jogador"></select>
+                    <button onclick="falir()">Falir</button>
+                    <button onclick="fecharBannerFal()">Fechar</button>
+                </div>
 
-            <navbar class="navbar">
-                <button class="Tranferir" id="tranferir" onclick="abrirBannerPix()">Pix</button>
-                <button class="adcionar" id="adcionar" onclick="abrirBannerAdd()">Add</button>
-                <button class="remover" id="remover" onclick="abrirBannerRem()">Remover</button>
-                <button class="falir" id="falir" onclick="abrirBannerFal()">Falir um jogador</button>
-            </navbar>
+                <navbar class="navbar">
+                    <button class="Tranferir" id="tranferir" onclick="abrirBannerPix()">Pix</button>
+                    <button class="adcionar" id="adcionar" onclick="abrirBannerAdd()">Add</button>
+                    <button class="remover" id="remover" onclick="abrirBannerRem()">Remover</button>
+                    <button class="falir" id="falir" onclick="abrirBannerFal()">Falir um jogador</button>
+                </navbar>
+            </div>
         </div>
         <script src="app.js"></script>
     </body>

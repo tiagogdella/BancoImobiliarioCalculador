@@ -1,4 +1,14 @@
-let jogadores = [];
+Vue.createApp({
+    data() {
+        return {
+            jogadores : [],
+            mostrarOverlay : true,
+            mostrarBannerPix : false,
+            mostrarSemSaldo : false
+        }
+    }
+}).mount('#app')
+
 
 function iniciarJogo() {
     document.getElementById('overlay').classList.add('hidden');
