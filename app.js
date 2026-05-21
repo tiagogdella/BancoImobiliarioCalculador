@@ -4,8 +4,37 @@ Vue.createApp({
             jogadores : [],
             mostrarOverlay : true,
             mostrarBannerPix : false,
-            mostrarSemSaldo : false
+            mostrarSemSaldo : false,
+            nomeDigitado: ''
         }
+    },
+     methods: {
+        adicionarJogador() {
+            const imagem = document.getElementById('imagem-sid');
+            if(imagem){
+                imagem.style.display = 'none';
+            }
+    
+            const input = this.nomeDigitado;
+            const nomeJogador = input.trim();
+
+            if (!nomeJogador) return;
+
+            const listaJogadores = document.getElementById('listaJogadores');
+
+            const jogadorElement = document.createElement('div');
+            jogadorElement.textContent = nomeJogador;
+            jogadorElement.classList.add('jogadorAdd');
+
+            listaJogadores.appendChild(jogadorElement);
+
+            this.jogadores.push({
+                nome: nomeJogador,
+                dinheiro: 2000
+                });
+
+            this.nomeDigitado = '';
+            }
     }
 }).mount('#app')
 
@@ -37,32 +66,7 @@ function iniciarJogo() {
     })
 }
 
-function adicionarJogador() {
-    const imagem = document.getElementById('imagem-sid');
-    if(imagem){
-        imagem.style.display = 'none';
-    }
-    
-    const input = document.getElementById('nomeJogador');
-    const nomeJogador = input.value.trim();
 
-    if (!nomeJogador) return;
-
-    const listaJogadores = document.getElementById('listaJogadores');
-
-    const jogadorElement = document.createElement('div');
-    jogadorElement.textContent = nomeJogador;
-    jogadorElement.classList.add('jogadorAdd');
-
-    listaJogadores.appendChild(jogadorElement);
-
-    jogadores.push({
-        nome: nomeJogador,
-        dinheiro: 2000
-    });
-
-    input.value = '';
-}
 
 function adcionar() {
     const nome1 = document.getElementById('nomeAdd').value;

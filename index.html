@@ -16,17 +16,23 @@
                     <div class="modal">
                         <div class="modal-header">
                             <h1>--- Bora banquinho! :) ---</h1>
-                            <input type="text" id="nomeJogador" placeholder="Nome do Jogador">
-                            <button onclick="adicionarJogador()">Adicionar</button>
-                            <button onclick="iniciarJogo()">Iniciar Jogo</button>
+                            <input type="text" v-model="nomeDigitado" placeholder="Nome do Jogador">
+                            <button @click="adicionarJogador()">Adicionar</button>
+                            <button @click="iniciarJogo()">Iniciar Jogo</button>
                         </div>
                         <div class="listaJogadores" id="listaJogadores">
+                            <div class="jogador" v-for="jogador in jogadores" :key="jogador.nome">
+                                {{jogador.nome}}
+                            </div>
                             <img src="sid.png" alt="Imagem do SID" id="imagem-sid" class="imagem-sid">
                         </div>
                     </div>
                 </div>
 
-                <div class="jogadores" id="jogadoresAtivos"></div>
+                <div v-for="jogador in jogadores" :key="jogador.nome">
+                    {{jogador.nome}},
+                    {{jogador.dinheiro}}
+                </div>
 
                 <div id="bannerPix" class="banner-oculto">
                     <p>PIX</p>

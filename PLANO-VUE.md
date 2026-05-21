@@ -45,21 +45,30 @@ Projeto 100% vanilla JS com:
 
 ---
 
-### ETAPA 3 — `v-model` no input
-- [ ] Adicionar `nomeDigitado: ''` no `data()`
-- [ ] Trocar `<input id="nomeJogador">` por `<input v-model="nomeDigitado">`
-- [ ] Remover o `document.getElementById('nomeJogador')` da função `adicionarJogador`
-- [ ] Usar `this.nomeDigitado` no lugar e resetar com `this.nomeDigitado = ''`
+### ETAPA 3 — `v-model` no input ✅
+- [ok] Adicionar `nomeDigitado: ''` no `data()`
+- [ok] Trocar `<input id="nomeJogador">` por `<input v-model="nomeDigitado">`
+- [ok] Remover o `document.getElementById('nomeJogador')` da função `adicionarJogador`
+- [ok] Usar `this.nomeDigitado` no lugar e resetar com `this.nomeDigitado = ''`
 > **Conceito:** `v-model` é two-way binding — o input atualiza o dado e o dado atualiza o input.
 
 ---
 
-### ETAPA 4 — `v-for` na lista do modal
-- [ ] Remover o bloco `jogadorElement = createElement(...)` de `adicionarJogador`
-- [ ] No HTML, trocar `<div id="listaJogadores">` para usar `v-for="jogador in jogadores"`
-- [ ] Cada item exibe `{{ jogador.nome }}`
-- [ ] Adicionar `:key="jogador.nome"` em cada item
+### ETAPA 4 — `v-for` na lista do modal e nos cards do jogo ⚠️ (em andamento)
+- [ ] Remover o bloco `jogadorElement = createElement(...)` de `adicionarJogador` (linhas 13-29 do app.js)
+- [ok] No HTML, `listaJogadores` já usa `v-for="jogador in jogadores" :key="jogador.nome"`
+- [ok] Cada item exibe `{{ jogador.nome }}`
+- [ok] Cards do jogo também usam `v-for` com `:key` (linha 32 do index.html)
+- [ ] Adicionar `class="jogador"` e estrutura correta (nome + `R$ dinheiro`) nos cards do jogo
+- [ ] Remover a função `iniciarJogo()` do app.js — o v-for substitui ela
+- [ ] Remover `atualizarLista()` do app.js — também substituída pelo v-for
 > **Conceito:** `v-for` renderiza uma lista de elementos a partir de um array — chega de criar elementos com JS.
+
+### PENDÊNCIAS IDENTIFICADAS ANTES DA PRÓXIMA SESSÃO
+- A imagem do SID (escondida ao adicionar 1º jogador) ainda usa `getElementById` — converter pra `v-show` na etapa 5
+- O overlay usa `id="overlay"` + `classList.add('hidden')` no JS — converter pra `v-show="mostrarOverlay"` na etapa 5
+- `iniciarJogo()` no HTML usa `@click` mas a função ainda é global e usa `jogadores` sem `this` — mover pra `methods` ou remover (etapa 6)
+- `adicionarJogador()` ainda tem DOM manipulation manual (linhas 13-29) que ficou obsoleta com o v-for
 
 ---
 
