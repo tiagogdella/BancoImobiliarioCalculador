@@ -142,11 +142,7 @@ button:hover {
 }
 
 .banner-oculto {
-    display: none; 
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
-.banner-visivel {
-    display: block; 
 }

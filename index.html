@@ -12,7 +12,7 @@
             <div class="fundo-principal">
                 <h1 class="titulo">Banquinho do SID</h1>
 
-                <div class="overlay" id="overlay">
+                <div class="overlay" v-show="mostrarOverlay">
                     <div class="modal">
                         <div class="modal-header">
                             <h1>--- Bora banquinho! :) ---</h1>
@@ -24,59 +24,83 @@
                             <div class="jogador" v-for="jogador in jogadores" :key="jogador.nome">
                                 {{jogador.nome}}
                             </div>
-                            <img src="sid.png" alt="Imagem do SID" id="imagem-sid" class="imagem-sid">
+                            <img src="sid.png" alt="Imagem do SID" id="imagem-sid" class="imagem-sid" v-show="jogadores.length === 0">
                         </div>
                     </div>
                 </div>
 
-                <div v-for="jogador in jogadores" :key="jogador.nome">
-                    {{jogador.nome}},
-                    {{jogador.dinheiro}}
-                </div>
+                <player-card
+                    v-for="jogador in jogadores"
+                    :key="jogador.nome"
+                    :nome="jogador.nome"
+                    :dinheiro="jogador.dinheiro">
+                </player-card>
 
-                <div id="bannerPix" class="banner-oculto">
+                <div v-show="mostrarBannerPix" id="bannerPix" class="banner-oculto" >
                     <p>PIX</p>
                     <form>
-                        <select id="nomeDe" placeholder="De"></select>
-                        <select id="nomePara" placeholder="Para"></select>
-                        <input type="number" id="valorPix" placeholder="Valor">
+                        <select v-model="nomeDe" placeholder="De">
+                            <option v-for="jogador in jogadores" :key="jogador.nome" :value="jogador.nome">
+                                {{jogador.nome}}
+                            </option>
+                        </select>
+                        <select v-model="nomePara" placeholder="Para">
+                            <option v-for="jogador in jogadores" :key="jogador.nome" :value="jogador.nome">
+                                {{jogador.nome}}
+                            </option>
+                        </select>
+                        <input v-model="valorPix" type="number" placeholder="Valor">
                     </form>
-                    <button onclick="fazerPix()">Fazer Pix</button>
-                    <button onclick="fecharBannerPix()">Fechar</button>
+                    <button @click="fazerPix()">Fazer Pix</button>
+                    <button @click="fecharBannerPix()">Fechar</button>
                 </div>
 
-                <div id="bannerAdd" class="banner-oculto">
+                <div v-show="mostrarBannerAdd" class="banner-oculto">
                     <p>farma: :)</p>
                     <form>
-                        <select id="nomeAdd" placeholder="Jogador"></select>
-                        <input type="number" id="valorAdd" placeholder="Valor">
+                        <select v-model="nomeSelecionado" placeholder="Jogador">
+                            <option v-for="jogador in jogadores" :key="jogador.nome" :value="jogador.nome">
+                                {{jogador.nome}}
+                            </option>
+                        </select>
+                        <input v-model="valorAdcionar" type="number" placeholder="Valor">
                     </form>
-                    <button onclick="adcionar()">Add</button>
-                    <button onclick="fecharBannerAdd()">Fechar</button>
+                    <button @click="adcionar()">Add</button>
+                    <button @click="fecharBannerAdd()">Fechar</button>
                 </div>
 
-                <div id="bannerRem" class="banner-oculto">
+                <div v-show="mostrarBannerRem" class="banner-oculto">
                     <p>poxa :(</p>
                     <form>
-                        <select id="nomeRem" placeholder="Jogador"></select>
-                        <input type="number" id="valorRem" placeholder="Valor">
+                        <select v-model="nomeRemover" placeholder="Jogador">
+                            <option v-for="jogador in jogadores" :key="jogador.nome" :value="jogador.nome">
+                                {{jogador.nome}}
+                            </option>
+                        </select>
+                        <input v-model="valorRemover" type="number" placeholder="Valor">
                     </form>
-                    <button onclick="remover()">Remover</button>
-                    <button onclick="fecharBannerRem()">Fechar</button>
+                    <button @click="remover()">Remover</button>
+                    <button @click="fecharBannerRem()">Fechar</button>
                 </div>
 
-                <div id="bannerFal" class="banner-oculto">
+                <div v-show="mostrarBannerFal" class="banner-oculto">
                     <p>Tempos melhores virão :(</p>
-                    <select id="nomeFal" placeholder="Jogador"></select>
-                    <button onclick="falir()">Falir</button>
-                    <button onclick="fecharBannerFal()">Fechar</button>
+                    <select v-model="nomeFalir" placeholder="Jogador">
+                        <option v-for="jogador in jogadores" :key="jogador.nome" :value="jogador.nome">
+                            {{jogador.nome}}
+                        </option>
+                    </select>
+                    <button @click="falir()">Falir</button>
+                    <button @click="fecharBannerFal()">Fechar</button>
                 </div>
+
+                <p>💰 Total em jogo: R$ {{ totalDinheiro }}</p>
 
                 <navbar class="navbar">
-                    <button class="Tranferir" id="tranferir" onclick="abrirBannerPix()">Pix</button>
-                    <button class="adcionar" id="adcionar" onclick="abrirBannerAdd()">Add</button>
-                    <button class="remover" id="remover" onclick="abrirBannerRem()">Remover</button>
-                    <button class="falir" id="falir" onclick="abrirBannerFal()">Falir um jogador</button>
+                    <button class="Tranferir" @click="abrirBannerPix()">Pix</button>
+                    <button class="adcionar" @click="abrirBannerAdd()">Add</button>
+                    <button class="remover" @click="abrirBannerRem()">Remover</button>
+                    <button class="falir" @click="abrirBannerFal()">Falir um jogador</button>
                 </navbar>
             </div>
         </div>

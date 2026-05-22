@@ -54,14 +54,14 @@ Projeto 100% vanilla JS com:
 
 ---
 
-### ETAPA 4 — `v-for` na lista do modal e nos cards do jogo ⚠️ (em andamento)
-- [ ] Remover o bloco `jogadorElement = createElement(...)` de `adicionarJogador` (linhas 13-29 do app.js)
+### ETAPA 4 — `v-for` na lista do modal e nos cards do jogo ✅
+- [ok] Remover o bloco `jogadorElement = createElement(...)` de `adicionarJogador`
 - [ok] No HTML, `listaJogadores` já usa `v-for="jogador in jogadores" :key="jogador.nome"`
 - [ok] Cada item exibe `{{ jogador.nome }}`
-- [ok] Cards do jogo também usam `v-for` com `:key` (linha 32 do index.html)
-- [ ] Adicionar `class="jogador"` e estrutura correta (nome + `R$ dinheiro`) nos cards do jogo
-- [ ] Remover a função `iniciarJogo()` do app.js — o v-for substitui ela
-- [ ] Remover `atualizarLista()` do app.js — também substituída pelo v-for
+- [ok] Cards do jogo também usam `v-for` com `:key`
+- [ok] Adicionar `class="jogador"` e estrutura correta (nome + `R$ dinheiro`) nos cards do jogo
+- [ok] Remover a função `iniciarJogo()` do app.js — o v-for substitui ela
+- [ok] Remover `atualizarLista()` do app.js — também substituída pelo v-for
 > **Conceito:** `v-for` renderiza uma lista de elementos a partir de um array — chega de criar elementos com JS.
 
 ### PENDÊNCIAS IDENTIFICADAS ANTES DA PRÓXIMA SESSÃO
@@ -72,51 +72,52 @@ Projeto 100% vanilla JS com:
 
 ---
 
-### ETAPA 5 — `v-show` nos modais e banners
-- [ ] Trocar `overlay` para usar `v-show="mostrarOverlay"` em vez de `.classList.add('hidden')`
-- [ ] Trocar `bannerPix` para usar `v-show="mostrarBannerPix"` em vez de `style.display = 'block'`
-- [ ] Trocar `meuBanner` para usar `v-show="mostrarSemSaldo"`
-- [ ] Remover todas as manipulações de `display` do JS
+### ETAPA 5 — `v-show` nos modais e banners ✅
+- [ok] Trocar `overlay` para usar `v-show="mostrarOverlay"` em vez de `.classList.add('hidden')`
+- [ok] Trocar `bannerPix` para usar `v-show="mostrarBannerPix"` em vez de `style.display = 'block'`
+- [ok] Imagem do SID usa `v-show="jogadores.length === 0"` — expressão direta no template
+- [ok] Remover manipulação manual da imagem do `adicionarJogador`
 > **Conceito:** `v-show` adiciona/remove `display:none` automaticamente com base em um booleano.
 
 ---
 
-### ETAPA 6 — `methods` para todas as funções
-- [ ] Mover `adicionarJogador`, `iniciarJogo`, `fazerPix`, `abrirBannerPix`, etc. para `methods: {}`
-- [ ] Substituir referências a DOM (`getElementById`) por `this.dados`
-- [ ] Substituir `jogadores.forEach(...)` por `this.jogadores.forEach(...)`
-- [ ] Remover `iniciarJogo` — o `v-for` nos cards já renderiza automaticamente
+### ETAPA 6 — `methods` para todas as funções ✅
+- [ok] Mover todas as funções para `methods: {}` no Vue
+- [ok] Substituir `getElementById` por dados reativos com `this`
+- [ok] Substituir `jogadores.forEach/find/filter` por `this.jogadores.*`
+- [ok] Remover funções globais obsoletas do final do arquivo
+- [ok] Deletar `atualizarDinheiro` — `v-for` reativo substitui ela
 > **Conceito:** `methods` é onde ficam as funções do componente; `this` acessa os dados reativos.
 
 ---
 
-### ETAPA 7 — `v-bind` (`:`) para atributos dinâmicos
-- [ ] Remover `id="dinheiro-${jogador.nome}"` — não precisamos mais de IDs manuais
-- [ ] Usar `{{ jogador.dinheiro }}` diretamente no template para exibir o saldo
-- [ ] `v-bind:class` para destacar jogador com saldo baixo (opcional, boa prática)
+### ETAPA 7 — `v-bind` (`:`) para atributos dinâmicos ✅
+- [ok] `v-for` com `:key` e `:value` nos `<option>` de todos os selects
+- [ok] `{{ jogador.dinheiro }}` diretamente no template — sem IDs manuais
+- [ok] `v-show` com expressão direta: `jogadores.length === 0`
 > **Conceito:** `:attr="valor"` vincula um atributo HTML a um dado reativo.
 
 ---
 
-### ETAPA 8 — `@click` nos botões (v-on)
-- [ ] Trocar todos os `onclick="funcao()"` por `@click="funcao"`
-- [ ] Remover todos os `id` de botões que só serviam para JS (`id="tranferir"`, etc.)
+### ETAPA 8 — `@click` nos botões (v-on) ✅
+- [ok] Trocar todos os `onclick="funcao()"` por `@click="funcao"`
+- [ok] Navbar com `@click` em todos os botões
 > **Conceito:** `@click` é atalho para `v-on:click` — ouvinte de evento declarativo no template.
 
 ---
 
-### ETAPA 9 — Computed properties
-- [ ] Criar `jogadoresSelect` computed: filtra jogadores para os `<select>` do Pix
-- [ ] Criar `totalDinheiro` computed: soma o dinheiro de todos (útil pra debug/exibição)
+### ETAPA 9 — Computed properties ✅
+- [ok] Criar `totalDinheiro` computed: soma o dinheiro de todos com `reduce`
+- [ok] Exibir `{{ totalDinheiro }}` no template sem parênteses
 > **Conceito:** `computed` são dados derivados — recalculam sozinhos quando a dependência muda.
 
 ---
 
-### ETAPA 10 — Primeiro componente filho
-- [ ] Extrair o card `<div class="jogador">` em um componente `PlayerCard`
-- [ ] Passar `nome` e `dinheiro` via `props`
-- [ ] Registrar o componente no app Vue
-- [ ] Usar `<player-card>` no template principal
+### ETAPA 10 — Primeiro componente filho ✅
+- [ok] Extrair o card `<div class="jogador">` em um componente `PlayerCard`
+- [ok] Passar `nome` e `dinheiro` via `props`
+- [ok] Registrar o componente no app Vue com `components: { PlayerCard }`
+- [ok] Usar `<player-card>` no template principal com `:nome` e `:dinheiro`
 > **Conceito:** componentes são blocos reutilizáveis com seu próprio template, dados e lógica.
 
 ---

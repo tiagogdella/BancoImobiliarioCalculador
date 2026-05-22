@@ -1,32 +1,51 @@
+const PlayerCard = {
+    props: ['nome', 'dinheiro'],
+    template: `
+        <div class="jogador">
+            <div>{{ nome }}</div>
+            <div>R$ {{ dinheiro }}</div>
+        </div>
+    `
+}
+
 Vue.createApp({
+    components:{
+        PlayerCard
+    },
     data() {
         return {
             jogadores : [],
             mostrarOverlay : true,
             mostrarBannerPix : false,
             mostrarSemSaldo : false,
-            nomeDigitado: ''
+            mostrarBannerAdd : false,
+            mostrarBannerRem : false,
+            mostrarBannerFal : false,
+            nomeDigitado: '',
+            nomeSelecionado : '',
+            valorAdcionar : '',
+            nomeDe : '',
+            nomePara : '',
+            valorPix : '',
+            nomeRemover : '',
+            valorRemover : '',
+            nomeFalir : ''
         }
     },
+
+    computed: {
+        totalDinheiro(){
+            return this.jogadores.reduce((soma, j) => soma + Number(j.dinheiro), 0)
+        }
+    },    
+
      methods: {
         adicionarJogador() {
-            const imagem = document.getElementById('imagem-sid');
-            if(imagem){
-                imagem.style.display = 'none';
-            }
     
             const input = this.nomeDigitado;
             const nomeJogador = input.trim();
 
             if (!nomeJogador) return;
-
-            const listaJogadores = document.getElementById('listaJogadores');
-
-            const jogadorElement = document.createElement('div');
-            jogadorElement.textContent = nomeJogador;
-            jogadorElement.classList.add('jogadorAdd');
-
-            listaJogadores.appendChild(jogadorElement);
 
             this.jogadores.push({
                 nome: nomeJogador,
@@ -34,235 +53,98 @@ Vue.createApp({
                 });
 
             this.nomeDigitado = '';
+        },
+
+        iniciarJogo(){
+            this.mostrarOverlay = false
+        },
+
+        abrirBannerPix(){
+            this.mostrarBannerPix = true
+        },
+
+        fecharBannerPix(){
+            this.mostrarBannerPix = false
+        },
+
+        abrirBannerAdd(){
+            this.mostrarBannerAdd = true
+        },
+
+        fecharBannerAdd(){
+            this.mostrarBannerAdd = false
+        },
+
+        abrirBannerRem(){
+            this.mostrarBannerRem = true
+        },
+
+        fecharBannerRem(){
+            this.mostrarBannerRem = false
+        },
+
+        abrirBannerFal(){
+            this.mostrarBannerFal = true
+        },
+
+        fecharBannerFal(){
+            this.mostrarBannerFal = false
+        },
+
+        fazerPix(){
+            const jogadorDe = this.jogadores.find(j=> j.nome === this.nomeDe)
+            const jogadorPara = this.jogadores.find(j=> j.nome === this.nomePara)
+
+            if(!jogadorDe || !jogadorPara){
+                console.log("Jogadores invalidos")
+                return
             }
+
+            if (Number(jogadorDe.dinheiro) < Number(this.valorPix)){
+                this.mostrarSemSaldo = true
+                return
+            }
+
+            jogadorDe.dinheiro = Number(jogadorDe.dinheiro) - Number(this.valorPix)
+            jogadorPara.dinheiro = Number(jogadorPara.dinheiro) + Number(this.valorPix)
+
+            this.fecharBannerPix()
+        },
+
+        adcionar(){
+            const jogador = this.jogadores.find(j=> j.nome === this.nomeSelecionado)
+
+            if(!jogador) return
+
+            jogador.dinheiro = Number(jogador.dinheiro) + Number(this.valorAdcionar)
+            this.mostrarBannerAdd = false
+        },
+
+        remover(){
+            const nome = this.jogadores.find(j=> j.nome === this.nomeRemover)
+
+            if (!nome){
+                console.log("Nome invalido!")
+                return
+            }
+
+            nome.dinheiro = Number(nome.dinheiro) - Number(this.valorRemover)
+            this.fecharBannerRem()
+        },
+
+        falir(){
+            const nome = this.jogadores.find(j=>j.nome === this.nomeFalir)
+            
+            if(!nome){
+                console.log("Nome invalido!")
+                return
+            }
+
+            this.jogadores = this.jogadores.filter(j=>j !== nome)
+            this.fecharBannerFal()
+        }
     }
 }).mount('#app')
 
 
-function iniciarJogo() {
-    document.getElementById('overlay').classList.add('hidden');
-
-    const container = document.getElementById('jogadoresAtivos');
-    container.innerHTML = '';
-
-    jogadores.forEach(jogador => {
-        //Nome fixo
-        const cardJogador = document.createElement('div');
-        cardJogador.classList.add('jogador');
-
-        const nomeElement = document.createElement('div');
-        nomeElement.textContent = jogador.nome;
-
-        //Dinheiro(dinamico)
-        const dinheiroElement = document.createElement('div');
-        dinheiroElement.textContent = `R$ ${jogador.dinheiro}`;
-        dinheiroElement.id = `dinheiro-${jogador.nome}`;
-
-        //add
-        cardJogador.appendChild(nomeElement);
-        cardJogador.appendChild(dinheiroElement);
-
-        container.appendChild(cardJogador);
-    })
-}
-
-
-
-function adcionar() {
-    const nome1 = document.getElementById('nomeAdd').value;
-    const valorAdd = document.getElementById('valorAdd').value;
-
-    const jogador = jogadores.find(j=> j.nome === nome1);
-
-    if (!jogador) {
-        console.error('Jogador não encontrado');
-        return;
-    };
-
-    jogador.dinheiro = Number(jogador.dinheiro) + Number(valorAdd);
-    atualizarDinheiro(jogador.nome);
-    fecharBannerAdd();
-}
-
-function abrirBannerAdd() {
-    const select = document.getElementById('nomeAdd');
-
-    select.innerHTML = '';
-    
-    jogadores.forEach(jogador => { 
-        const option1 = document.createElement('option');
-        option1.value = jogador.nome;
-        option1.textContent = jogador.nome;
-        
-        select.appendChild(option1);
-    });
-    
-    const banner = document.getElementById('bannerAdd');
-    banner.style.display = 'block';
-}
-
-function remover() {
-    const nome1 = document.getElementById('nomeRem').value;
-    const valorAdd = document.getElementById('valorRem').value;
-
-    const jogador = jogadores.find(j=> j.nome === nome1);
-
-    if (!jogador) {
-        console.error('Jogador não encontrado');
-        return;
-    };
-
-    jogador.dinheiro = Number(jogador.dinheiro) - Number(valorAdd);
-    atualizarDinheiro(jogador.nome);
-    fecharBannerRem();
-}
-
-function abrirBannerRem() {
-    const select = document.getElementById('nomeRem');
-
-    select.innerHTML = '';
-
-    jogadores.forEach(jogador => { 
-        const option1 = document.createElement('option');
-        option1.value = jogador.nome;
-        option1.textContent = jogador.nome;
-        
-        select.appendChild(option1);
-    });
-
-    const banner = document.getElementById('bannerRem');
-    banner.style.display = 'block';
-
-}
-
-function fazerPix() {
-
-    const nome1 = document.getElementById('nomeDe').value;
-    const nome2 = document.getElementById('nomePara').value;
-    const valorPix = document.getElementById('valorPix').value;
-
-    const jogador1 = jogadores.find(j => j.nome === nome1);
-    const jogador2 = jogadores.find(j => j.nome === nome2);
-
-
-    if (!jogador1 || !jogador2) {
-        console.error('Jogador não encontrado');
-        return;
-    };
-
-    if (Number(jogador1.dinheiro) < Number(valorPix)) {
-        abrirModalSemSaldo(nome1, nome2, valorPix);
-        return;
-    };
-
-    jogador1.dinheiro = Number(jogador1.dinheiro) - Number(valorPix);
-    jogador2.dinheiro = Number(jogador2.dinheiro) + Number(valorPix);
-
-    atualizarDinheiro(jogador1.nome);
-    atualizarDinheiro(jogador2.nome);
-    fecharBannerPix();
-}
-
-function abrirBannerPix() {
-    const selectDe = document.getElementById('nomeDe');
-    const selectPara = document.getElementById('nomePara');
-
-    selectDe.innerHTML = '';
-    selectPara.innerHTML = '';
-    
-    jogadores.forEach(jogador => { 
-        const option1 = document.createElement('option');
-        option1.value = jogador.nome;
-        option1.textContent = jogador.nome;
-        
-        const option2 = document.createElement('option');
-        option2.value = jogador.nome;
-        option2.textContent = jogador.nome;
-
-        selectDe.appendChild(option1);
-        selectPara.appendChild(option2);
-    });
-
-    const banner = document.getElementById('bannerPix');
-    banner.style.display = 'block';
-
-}
-
-function falir(){
-    const nomeFal = document.getElementById('nomeFal').value
-    jogadores = jogadores.filter(j => j.nome !== nomeFal);
-
-    atualizarLista();
-    fecharBannerFal();
-}
-
-function abrirBannerFal() {
-    const select = document.getElementById('nomeFal');
-
-    select.innerHTML = '';
-
-    jogadores.forEach(jogador => { 
-        const option1 = document.createElement('option');
-        option1.value = jogador.nome;
-        option1.textContent = jogador.nome;
-        
-        select.appendChild(option1);
-    });
-
-    const banner = document.getElementById('bannerFal');
-    banner.style.display = 'block';
-}
-
-function fecharBannerPix() {
-    const banner = document.getElementById('bannerPix');
-    banner.style.display = 'none';
-}
-
-function fecharBannerAdd() {
-    const banner = document.getElementById('bannerAdd');
-    banner.style.display = 'none';
-}
-
-function fecharBannerRem() {
-    const banner = document.getElementById('bannerRem');
-    banner.style.display = 'none';
-}
-
-function fecharBannerFal() {
-    document.getElementById('bannerFal').style.display = 'none';
-}
-
-
-function atualizarDinheiro(nome) {
-    const dinheiroElement = document.getElementById(`dinheiro-${nome}`);
-    if (dinheiroElement) {
-        const jogador = jogadores.find(jogador => jogador.nome === nome);
-        dinheiroElement.textContent = `R$ ${Number(jogador.dinheiro)}`;
-    };
-}
-
-function atualizarLista() {
-    const container = document.getElementById('jogadoresAtivos');
-    container.innerHTML = '';
-
-    jogadores.forEach(jogador => {
-        //Nome fixo
-        const cardJogador = document.createElement('div');
-        cardJogador.classList.add('jogador');
-
-        const nomeElement = document.createElement('div');
-        nomeElement.textContent = jogador.nome;
-
-        //Dinheiro(dinamico)
-        const dinheiroElement = document.createElement('div');
-        dinheiroElement.textContent = `R$ ${jogador.dinheiro}`;
-        dinheiroElement.id = `dinheiro-${jogador.nome}`;
-
-        //add
-        cardJogador.appendChild(nomeElement);
-        cardJogador.appendChild(dinheiroElement);
-
-        container.appendChild(cardJogador);
-    })
-}
 
