@@ -15,7 +15,7 @@
                 <div class="overlay" v-show="mostrarOverlay">
                     <div class="modal">
                         <div class="modal-header">
-                            <h1>--- Bora banquinho! :) ---</h1>
+                            <h1 class="boraBanquinho">--- Bora banquinho! :) ---</h1>
                             <input type="text" v-model="nomeDigitado" placeholder="Nome do Jogador">
                             <button @click="adicionarJogador()">Adicionar</button>
                             <button @click="iniciarJogo()">Iniciar Jogo</button>
@@ -94,14 +94,15 @@
                     <button @click="fecharBannerFal()">Fechar</button>
                 </div>
 
-                <p>💰 Total em jogo: R$ {{ totalDinheiro }}</p>
-
-                <navbar class="navbar">
-                    <button class="Tranferir" @click="abrirBannerPix()">Pix</button>
-                    <button class="adcionar" @click="abrirBannerAdd()">Add</button>
-                    <button class="remover" @click="abrirBannerRem()">Remover</button>
-                    <button class="falir" @click="abrirBannerFal()">Falir um jogador</button>
-                </navbar>
+                <div class="rodape">
+                    <p class="totalDinheiroEmJogo">💰 Total em jogo: R$ {{ totalDinheiro }}</p>
+                    <navbar class="navbar">
+                        <button class="Tranferir" @click="abrirBannerPix()">Pix</button>
+                        <button class="adcionar" @click="abrirBannerAdd()">Add</button>
+                        <button class="remover" @click="abrirBannerRem()">Remover</button>
+                        <button class="falir" @click="abrirBannerFal()">Falir um jogador</button>
+                    </navbar>
+                </div>
             </div>
         </div>
         <script src="app.js"></script>
