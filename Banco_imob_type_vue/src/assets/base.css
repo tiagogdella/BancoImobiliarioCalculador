@@ -1,0 +1,25 @@
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-image: 
+        url("/sid.png"),
+        radial-gradient(circle, #f1fdc4, #aee0e0);
+    background-repeat: repeat, no-repeat;
+    background-size: 200px, cover;
+}
+
+button {
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #f1fdc4;
+}

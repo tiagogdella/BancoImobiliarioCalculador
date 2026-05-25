@@ -1,3 +1,16 @@
 PLANO-VUE.md
-
 PLANO-TYPESCRIPT.md
+
+# Node
+**/node_modules
+**/dist
+**/.env
+**/.env.local
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
